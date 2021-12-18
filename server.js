@@ -3,6 +3,7 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
+var port = process.env.PORT || 8000;
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
@@ -26,8 +27,11 @@ io.on('connection', socket => {
   })
 })
 
-const { PORT=3000, LOCAL_ADDRESS='0.0.0.0' } = process.env
-server.listen(PORT, LOCAL_ADDRESS, () => {
-  const address = server.address();
-  console.log('server listening at', address);
+server.listen(port, () => {
+  console.log("App is running on port " + port);
 });
+// const { PORT=3000, LOCAL_ADDRESS='0.0.0.0' } = process.env
+// server.listen(PORT, LOCAL_ADDRESS, () => {
+//   const address = server.address();
+//   console.log('server listening at', address);
+// });
